@@ -1,6 +1,9 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from .serializers import RoomSerializer
+from .models import Add
+from rest_framework import generics
 
 # Create your views here.
-def index(request):
-    return HttpResponse("<h4>Hello, world. You're at the first index.</h4>")
+class Roomview(generics.ListAPIView):
+    queryset=Add.objects.all()
+    serializer_class=RoomSerializer
