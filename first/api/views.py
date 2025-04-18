@@ -4,6 +4,6 @@ from .models import Add
 from rest_framework import generics
 
 # Create your views here.
-class Roomview(generics.ListAPIView):
+class Roomview(generics.CreateAPIView):
     queryset=Add.objects.all()
     serializer_class=RoomSerializer
