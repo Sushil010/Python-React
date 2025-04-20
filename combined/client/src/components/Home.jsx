@@ -95,7 +95,12 @@ const Home = () => {
               {book.map(function(value,id){
                 return <div key={id}>
                     <h4 className='text-yellow-300 mb-2'>Title: {value.title}</h4>
-                    <h4 className='text-blue-800 mb-6'>Pages: {value.pages}</h4>
+                    <h4 className='text-blue-800 mb-1 '>Pages: {value.pages}</h4>
+                    <div>
+                    <input className='border p-1 border-amber-200 mb-6' type="text" placeholder='New title..' />
+                    <button className='ml-2 border border-green-800 p-1 cursor-pointer active:scale-90'>Update</button>
+                    <button className='ml-2 border text-red-600 border-black p-1 cursor-pointer active:scale-90'>Delete</button>
+                    </div>
                     
                 </div>
               })}
