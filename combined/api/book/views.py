@@ -10,6 +10,14 @@ from .serializers import BookSerializer
 # Create your views here.
 
 
+
+
+
+
+
+
+
+
 @api_view(['GET'])
 def get_books(request):
     # the below line is to get all the books from the database
@@ -21,3 +29,27 @@ def get_books(request):
 
     # the below line will return the data in JSON format with a 200 OK status code
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@api_view(['POST'])
+def post_books(request):
+    data=request.data
+    serializer=BookSerializer(data=data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data,status=status.HTTP_201_CREATED)
+    else:
+        return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+
+
+
+
+
+
+
+
+
+
+
+
+
