@@ -4,6 +4,6 @@ from .views import mainpage
 
 urlpatterns = [
     
-    path('', mainpage, name='mainpage'),
+    path('books/', mainpage, name='mainpage'),
     
 ]
