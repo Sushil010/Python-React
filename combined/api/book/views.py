@@ -41,6 +41,19 @@ def post_books(request):
     else:
         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
 
+@api_view(['PUT','DELETE'])
+def updel(request,pk):
+    try:
+        book=Book.objects.get(pk=pk)
+    except Book.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method=='DELETE':
+        book.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    
+    # elif request.method=='POST':
+    #     pass
 
 
 

@@ -25,8 +25,9 @@ const Home = () => {
   }
 
 
-  const data_post=async()=>{
+  const data_post=async(e)=>{
 
+    e.preventDefault()
     const bookData={
       // "field_name_in_backend": value_from_frontend_variable
 
@@ -45,7 +46,11 @@ const Home = () => {
       })
 
       const data= await response.json()
-      console.log(data)
+      // console.log(data)
+      setBook((prev)=>[...prev,data])
+
+      setTitle("")
+      setPage(0)
 
     } catch (error) {
       console.log(error)
@@ -91,6 +96,7 @@ const Home = () => {
                 return <div key={id}>
                     <h4 className='text-yellow-300 mb-2'>Title: {value.title}</h4>
                     <h4 className='text-blue-800 mb-6'>Pages: {value.pages}</h4>
+                    
                 </div>
               })}
 
