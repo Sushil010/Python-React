@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react'
 const Home = () => {
   
   const [book, setBook] = useState([])
+  const [title, setTitle] = useState("")
+  const [page,setPage]=useState(0)
 
 
 
@@ -11,7 +13,7 @@ const Home = () => {
     try{
       const response = await fetch("http://127.0.0.1:8000/books/")
       const data= await response.json()
-      console.log(data)
+      setBook(data)
     
     } 
     
@@ -21,6 +23,35 @@ const Home = () => {
     
     
   }
+
+
+  const data_post=async()=>{
+
+    const bookData={
+      // "field_name_in_backend": value_from_frontend_variable
+
+      title:title,
+      pages:page
+    }
+
+    try {
+
+      const response=await fetch("http://127.0.0.1:8000/post_books/",{
+        method:"POST",
+        headers:{
+          'Content-Type':'application/json'
+        },
+        body:JSON.stringify(bookData)
+      })
+
+      const data= await response.json()
+      console.log(data)
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
 
   useEffect(() => {
     data_fetch()
@@ -35,9 +66,33 @@ const Home = () => {
         
            <div className='text-2xl mt-7 '>
                 
-                <input className='mr-4 p-1 border border-amber-200' type="text" placeholder='Enter name' />
-                <input className='ml-4 p-1 mr-4 border border-amber-200' type="integer" placeholder='Enter date' />
-                <button className='cursor-pointer rounded-2xl p-1.5 border border-amber-200'>Submit</button>
+                <input
+                  onChange={
+                    (e)=>{setTitle(e.target.value)}
+                  } 
+                 className='mr-4 p-1 border border-amber-200' 
+                 type="text" 
+                 placeholder='Enter name' />
+                
+                <input 
+                onChange={
+                  (e)=>{ setPage(e.target.value) }
+                } 
+                
+                className='ml-4 p-1 mr-4 border border-amber-200' 
+                type="integer"
+                placeholder='Enter Pages' />
+                
+                <button
+                 onClick={data_post}
+                 className='cursor-pointer rounded-2xl p-1.5 border border-amber-200'>Submit</button>
+
+              {book.map(function(value,id){
+                return <div key={id}>
+                    <h4 className='text-yellow-300 mb-2'>Title: {value.title}</h4>
+                    <h4 className='text-blue-800 mb-6'>Pages: {value.pages}</h4>
+                </div>
+              })}
 
            </div>
         
