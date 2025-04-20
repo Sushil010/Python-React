@@ -1,9 +1,36 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 const Home = () => {
+  
+  const [book, setBook] = useState([])
+
+
+
+  const data_fetch=async()=>{
+    
+    try{
+      const response = await fetch("http://127.0.0.1:8000/books/")
+      const data= await response.json()
+      console.log(data)
+    
+    } 
+    
+    catch (error) {
+      console.log(error)
+    }
+    
+    
+  }
+
+  useEffect(() => {
+    data_fetch()
+  }, [])
+  
+
   return (
     <>
     
+
     <div className='flex justify-center align-center'>
         
            <div className='text-2xl mt-7 '>
