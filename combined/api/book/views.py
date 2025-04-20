@@ -8,8 +8,7 @@ from .serializers import BookSerializer
 
 
 # Create your views here.
-def mainpage(request):
-    return HttpResponse("Hello, world. You're at the book index.")
+
 
 @api_view(['GET'])
 def get_books(request):
@@ -17,6 +16,7 @@ def get_books(request):
     books=Book.objects.all()
 
     # the below line will serialize the data and convert it to JSON format 
+    # A serializer object — not usable in HTTP responses
     serializer=BookSerializer(books, many=True)
 
     # the below line will return the data in JSON format with a 200 OK status code
