@@ -5,6 +5,7 @@ const Home = () => {
   const [book, setBook] = useState([])
   const [title, setTitle] = useState("")
   const [page,setPage]=useState(0)
+  const[newTitle,setnewTitle]=useState("")
 
 
 
@@ -57,6 +58,70 @@ const Home = () => {
     }
   }
 
+ 
+  const Updater=async(pk,pages)=>{
+    const bookData={
+      // "field_name_in_backend": value_from_frontend_variable
+
+      title:newTitle,
+      pages
+    }
+
+    try {
+
+      const response=await fetch(`http://127.0.0.1:8000/books/${pk}/`,{
+        method:"PUT",
+        headers:{
+          'Content-Type':'application/json'
+        },
+        body:JSON.stringify(bookData)
+      })
+
+      const data= await response.json()
+      // console.log(data)
+      setBook(
+      
+        (prev)=>prev.map((book)=>{
+          if(book.id===pk){
+              return data
+          }
+          else {
+            return book
+          }
+        })
+      
+      )
+
+      
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const Deleter=async(pk)=>{
+    
+
+    try {
+
+      const response=await fetch(`http://127.0.0.1:8000/books/${pk}/`,{
+        method:"DELETE",
+      })
+
+      // console.log(data)
+      setBook(
+      
+      (prev=>(prev.filter(book=>book.id!==pk)))
+
+      )
+
+      
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
 
   useEffect(() => {
     data_fetch()
@@ -97,9 +162,26 @@ const Home = () => {
                     <h4 className='text-yellow-300 mb-2'>Title: {value.title}</h4>
                     <h4 className='text-blue-800 mb-1 '>Pages: {value.pages}</h4>
                     <div>
-                    <input className='border p-1 border-amber-200 mb-6' type="text" placeholder='New title..' />
-                    <button className='ml-2 border border-green-800 p-1 cursor-pointer active:scale-90'>Update</button>
-                    <button className='ml-2 border text-red-600 border-black p-1 cursor-pointer active:scale-90'>Delete</button>
+                    
+                    <input 
+                    onChange={
+                      (e)=>{setnewTitle(e.target.value)}
+                    }
+                    
+                    className='border p-1 border-amber-200 mb-6' 
+                    type="text"
+                    placeholder='New title..' />
+
+                    <button 
+                      onClick={()=>{Updater(value.id,value.pages)}}
+                      
+                     className='ml-2 border border-green-800 p-1 cursor-pointer active:scale-90'>
+                      Update
+                    </button>
+                    <button 
+                    onClick={()=>{Deleter(value.id)}}
+                    className='ml-2 border text-red-600 border-black p-1
+                     cursor-pointer active:scale-90'>Delete</button>
                     </div>
                     
                 </div>
