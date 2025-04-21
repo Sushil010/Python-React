@@ -35,7 +35,8 @@ def updation(request,pk):
     if request.method=="DELETE":
         shelf.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
-    elif request.method=="POST":
+   
+    elif request.method=="PUT":
         data=request.data
         serializer=Shelfserializer(shelf,data=data)
         if serializer.is_valid():
