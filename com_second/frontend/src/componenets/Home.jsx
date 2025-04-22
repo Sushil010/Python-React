@@ -16,10 +16,10 @@ const Home = () => {
     setShelf(data)
   }
 
-  const putvalue=async()=>{
-
+  const putvalue=async(e)=>{
+    e.preventDefault()
     const shelfdata={
-      // frontend variables:backend varaibales
+      // backend variables:frontend varaibales
       // name:name,
       // date:date
       name,
@@ -39,7 +39,8 @@ const Home = () => {
 
       const data=await dpost.json()
       setShelf((prev)=>[...prev,data])
-      
+      setName("")
+      setDate("")
 
 
     } 
@@ -68,7 +69,12 @@ const Home = () => {
   }
 
 
-  const Updater=async(pk)=>{
+  const Updater=async(pk,date)=>{
+
+    const values={
+      name:title,
+      date:date
+    }
 
     try 
     {
@@ -76,9 +82,29 @@ const Home = () => {
      const response= await fetch(`http://127.0.0.1:8000/getshelf/${pk}/`,{
 
       method: "PUT",
-      
+      headers:{
 
+          'Content-Type':'application/json'
+      },
+      body:JSON.stringify(values),
      })
+
+     const data= await response.json()
+     
+     setShelf(
+
+      (prev)=>(prev.map((shelf)=>{
+
+        if (shelf.id==pk){
+          return data
+        }
+        else{
+          return shelf
+        }
+
+      }))
+
+     )
 
     
     } 
@@ -104,6 +130,7 @@ const Home = () => {
         <div className=''>
 
         <input 
+        value={name}
         onChange={
           (e)=>{setName(e.target.value)}
         }
@@ -112,6 +139,7 @@ const Home = () => {
         placeholder='Enter Name..'/>
         
         <input 
+        value={date}
         onChange={
           (e)=>{setDate(e.target.value)}
         }
@@ -143,7 +171,7 @@ const Home = () => {
                 
                 
                 <button
-                onClick={()=>{Updater(value.id)}}
+                onClick={()=>{Updater(value.id,value.date)}}
                 className='text-green-700  cursor-pointer 
                 text-2xl ml-3 p-1.5 active:scale-90 border border-amber-100'>
                 
