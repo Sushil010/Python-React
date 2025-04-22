@@ -5,6 +5,7 @@ const Home = () => {
   const[shelf,setShelf]=useState([])
   const [name, setName] = useState("")
   const [date,setDate]=useState()
+  const [title, setTitle] = useState("") 
 
 
   const getvalue=async()=>{
@@ -38,6 +39,7 @@ const Home = () => {
 
       const data=await dpost.json()
       setShelf((prev)=>[...prev,data])
+      
 
 
     } 
@@ -51,6 +53,42 @@ const Home = () => {
     
     
   }
+
+
+  const Deleter=async(pk)=>{
+
+    const value=await fetch(`http://127.0.0.1:8000/getshelf/${pk}/`,{
+      method:"DELETE"
+    })
+
+    setShelf(
+      (prev)=>prev.filter(shelf=>shelf.id!==pk)
+    )
+
+  }
+
+
+  const Updater=async(pk)=>{
+
+    try 
+    {
+    
+     const response= await fetch(`http://127.0.0.1:8000/getshelf/${pk}/`,{
+
+      method: "PUT",
+      
+
+     })
+
+    
+    } 
+    
+    catch (error) {
+      console.log(error)
+    }
+
+  }
+
 
   useEffect(() => {
     
@@ -96,7 +134,27 @@ const Home = () => {
             return <div key={idx} className=''>
                 <h4 className='text-yellow-500 text-2xl mt-2 ml-3'>Title: {value.name}</h4>
                 <h4 className='text-blue-500 mb-2 text-2xl ml-3'>Released Year:{value.date}</h4>
+                
+                <input 
+                className='border border-black ml-3 p-1.5'
+                onChange={(e)=>{setTitle(e.target.value)}}
+                type="text" 
+                placeholder='Updated TItle...' />
+                
+                
+                <button
+                onClick={()=>{Updater(value.id)}}
+                className='text-green-700  cursor-pointer 
+                text-2xl ml-3 p-1.5 active:scale-90 border border-amber-100'>
+                
+                  Update
+                
+                  
+                </button>
+
                 <button 
+
+                onClick={()=>{Deleter(value.id)}}
                 className='text-red-600  cursor-pointer 
                 text-2xl ml-3 p-1.5 active:scale-90 border border-amber-100'>
                   Delete
