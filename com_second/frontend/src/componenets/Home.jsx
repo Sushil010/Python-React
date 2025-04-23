@@ -6,6 +6,7 @@ const Home = () => {
   const [name, setName] = useState("")
   const [date,setDate]=useState()
   const [title, setTitle] = useState("") 
+  const [search, setSearch] = useState("")
 
 
   const getvalue=async()=>{
@@ -129,6 +130,22 @@ const Home = () => {
 
   return (
     <div className=''>
+
+      <div className='flex justify-center items-center'>
+          <input
+          value={search}
+          onChange={(e)=>{setSearch(e.target.value)}}
+          className='border text-2xl border-white p-2 mt-5'
+           type="text" 
+           placeholder='Enter name' />
+           <button
+           
+          //  onClick={()=>{}} 
+           className='border-2 cursor-pointer 
+           active:scale-90 ml-2 border-purple-800 text-2xl p-2 mt-5'>
+            Search
+           </button>
+      </div>
         
         <div className=''>
 

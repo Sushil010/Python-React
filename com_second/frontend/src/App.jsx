@@ -4,7 +4,7 @@ import Home from './componenets/Home'
 const App = () => {
   
   return (
-    <div className='bg-gray-700 text-white w-full h-[100vh]'>
+    <div className='bg-gray-700 text-white w-full h-full'>
       
       <Home/>
       
