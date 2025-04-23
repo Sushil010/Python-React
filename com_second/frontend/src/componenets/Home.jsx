@@ -95,16 +95,19 @@ const Home = () => {
 
       (prev)=>(prev.map((shelf)=>{
 
-        if (shelf.id==pk){
+        if (shelf.id==pk){  
           return data
         }
         else{
           return shelf
         }
-
-      }))
+        
+      })),
+      
+      
 
      )
+     setTitle("")
 
     
     } 
@@ -164,6 +167,7 @@ const Home = () => {
                 <h4 className='text-blue-500 mb-2 text-2xl ml-3'>Released Year:{value.date}</h4>
                 
                 <input 
+                
                 className='border border-black ml-3 p-1.5'
                 onChange={(e)=>{setTitle(e.target.value)}}
                 type="text" 
@@ -171,6 +175,7 @@ const Home = () => {
                 
                 
                 <button
+                
                 onClick={()=>{Updater(value.id,value.date)}}
                 className='text-green-700  cursor-pointer 
                 text-2xl ml-3 p-1.5 active:scale-90 border border-amber-100'>
