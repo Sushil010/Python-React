@@ -119,6 +119,28 @@ const Home = () => {
 
   }
 
+  const Searcher=async(pk)=>{
+
+    try {
+      const response= await fetch("",{
+        method: "GET",
+      })
+
+      // const data=response.json()
+      setShelf(
+        (prev)=>(prev.filter(shelf=>shelf.id==pk))
+      )
+
+    }
+    
+    
+    catch (error) {
+      console.log(error)
+    }
+    
+  }
+
+
 
   useEffect(() => {
     
@@ -138,9 +160,10 @@ const Home = () => {
           className='border text-2xl border-white p-2 mt-5'
            type="text" 
            placeholder='Enter name' />
+           
            <button
            
-          //  onClick={()=>{}} 
+          //  onClick={()=>{Searcher()}} 
            className='border-2 cursor-pointer 
            active:scale-90 ml-2 border-purple-800 text-2xl p-2 mt-5'>
             Search
