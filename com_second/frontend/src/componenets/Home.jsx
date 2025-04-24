@@ -119,26 +119,26 @@ const Home = () => {
 
   }
 
-  const Searcher=async(pk)=>{
+  // const Searcher=async(pk)=>{
 
-    try {
-      const response= await fetch("",{
-        method: "GET",
-      })
+  //   try {
+  //     const response= await fetch("",{
+  //       method: "GET",
+  //     })
 
-      // const data=response.json()
-      setShelf(
-        (prev)=>(prev.filter(shelf=>shelf.id==pk))
-      )
+  //     // const data=response.json()
+  //     setShelf(
+  //       (prev)=>(prev.filter(shelf=>shelf.id==pk))
+  //     )
 
-    }
+  //   }
     
     
-    catch (error) {
-      console.log(error)
-    }
+  //   catch (error) {
+  //     console.log(error)
+  //   }
     
-  }
+  // }
 
 
 
@@ -201,7 +201,11 @@ const Home = () => {
 
        
 
-          {shelf.map(function(value,idx){
+          {shelf.filter(
+            item=>item.name.toLowerCase().includes(search.toLowerCase())
+          )
+          
+          .map(function(value,idx){
             return <div key={idx} className=''>
                 <h4 className='text-yellow-500 text-2xl mt-2 ml-3'>Title: {value.name}</h4>
                 <h4 className='text-blue-500 mb-2 text-2xl ml-3'>Released Year:{value.date}</h4>
