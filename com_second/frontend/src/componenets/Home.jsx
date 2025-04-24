@@ -161,13 +161,13 @@ const Home = () => {
            type="text" 
            placeholder='Enter name' />
            
-           <button
+           {/* <button
            
           //  onClick={()=>{Searcher()}} 
            className='border-2 cursor-pointer 
            active:scale-90 ml-2 border-purple-800 text-2xl p-2 mt-5'>
             Search
-           </button>
+           </button> */}
       </div>
         
         <div className=''>
@@ -203,8 +203,10 @@ const Home = () => {
 
           {shelf.filter(
             item=>item.name.toLowerCase().includes(search.toLowerCase())
-          )
+            ||
+            item.date.toString().toLowerCase().includes(search.toLowerCase())
           
+          )
           .map(function(value,idx){
             return <div key={idx} className=''>
                 <h4 className='text-yellow-500 text-2xl mt-2 ml-3'>Title: {value.name}</h4>
