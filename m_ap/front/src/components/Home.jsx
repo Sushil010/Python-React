@@ -2,11 +2,13 @@ import React, { useState } from 'react'
 
 const Home = () => {
 
+    const [dat, setDat] = useState([])
 
     const datas=async()=>{
         const response =await fetch (" http://www.omdbapi.com/?i=tt3896198&apikey=48c44e9e")
         const values= await response.json()
         console.log(values)
+        setDat(values)
     }
 
 
@@ -20,6 +22,13 @@ const Home = () => {
     >
         Click
     </button>
+
+
+    {dat.map(
+        
+    )}
+
+
 
     </div>
   )
