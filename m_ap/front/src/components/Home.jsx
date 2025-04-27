@@ -44,7 +44,7 @@ const Home = () => {
         <div>
             <img src={dat.Poster} alt="" />
             <h4>{dat.Title}</h4>
-            {/* <h5>{dat.Ratings[0].Value}</h5> */}
+            
             {dat.Ratings && dat.Ratings.map(function(values,idx){
                 return <div key={idx}>
                         <h5>{values.Source}:{values.Value}</h5>
