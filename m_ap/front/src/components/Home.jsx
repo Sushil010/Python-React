@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react'
 
 const Home = () => {
-
-    const [dat, setDat] = useState({})
+    // const apiKey="48c44e9e"
+    const [dat, setDat] = useState([])
     useEffect(() => {
     
     datas()
      
     }, [])
+    // http://www.omdbapi.com/?s=Batman&page=2
+    // http://www.omdbapi.com/?s=batman&page=2&apikey=yourkey
     
     const datas=async()=>{
-        const response =await fetch (" http://www.omdbapi.com/?i=tt3896198&apikey=48c44e9e")
+        const response =await fetch ("http://www.omdbapi.com/?s=batman&page=2&apikey=48c44e9e")
         const values= await response.json()
         console.log(values)
         setDat(values)
@@ -20,6 +22,9 @@ const Home = () => {
   return (
     <div className=' text-white text-2xl w-full h-[100vh] bg-gray-700'>
 
+    <div>
+        
+    </div>
    
     {/* <button
     onClick={datas}
@@ -40,7 +45,7 @@ const Home = () => {
     } */}
 
 
-    {dat.Title && (
+    {/* {dat.Title && (
         <div>
             <img src={dat.Poster} alt="" />
             <h4>{dat.Title}</h4>
@@ -51,7 +56,17 @@ const Home = () => {
                 </div>
             })}
         </div>
-    )}
+    )} */}
+
+
+    {dat.map(function(value,index){
+        <div key={index}>
+            <h5>
+                {dat.Title}
+            </h5>
+
+        </div>
+    })}
 
 
 
