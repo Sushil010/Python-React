@@ -3,11 +3,15 @@ import React, { useEffect, useState } from 'react'
 const Home = () => {
     // const apiKey="48c44e9e"
     const [dat, setDat] = useState([])
+    const [search, setSearch] = useState("")
+    
     useEffect(() => {
     
     datas()
      
     }, [])
+
+
     // http://www.omdbapi.com/?s=Batman&page=2
     // http://www.omdbapi.com/?s=batman&page=2&apikey=yourkey
     
@@ -22,8 +26,14 @@ const Home = () => {
   return (
     <div className=' text-white text-2xl w-full h-full bg-gray-700'>
 
-    <div>
+    <div className='flex justify-center items-center'>
+        <input 
+        onChange={(e)=>{setSearch(e.target.value)}}
+        type="text" 
+        placeholder='Search Movies'
+        className='my-5'
         
+        />
     </div>
    
     
@@ -53,16 +63,21 @@ const Home = () => {
         </div>
     )} */}
 
-
+        <div  className='grid grid-cols-3'>
     {dat.map(function(value,index){
-        return <div key={index}>
-            <img src="" alt="" />
+        return <div className='flex flex-col text-center p-4 rounded-2xl items-center justify-center mb-3'
+         key={index}>
+            
+            <img src={value.Poster} alt={value.Title} />
             <h5>
-                {value.Title}:{value.Year}
+                {value.Title}<br/>
+                {value.Year}
             </h5>
 
         </div>
     })}
+
+        </div>
 
 
 
