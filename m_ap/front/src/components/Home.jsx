@@ -15,26 +15,21 @@ const Home = () => {
         const response =await fetch ("http://www.omdbapi.com/?s=batman&page=2&apikey=48c44e9e")
         const values= await response.json()
         console.log(values)
-        setDat(values)
+        setDat(values.Search)
     }
 
 
   return (
-    <div className=' text-white text-2xl w-full h-[100vh] bg-gray-700'>
+    <div className=' text-white text-2xl w-full h-full bg-gray-700'>
 
     <div>
         
     </div>
    
-    {/* <button
-    onClick={datas}
-    className='p-1.5 mx-1 my-5 border border-black text-green-500 cursor-pointer active:scale-90'
-    >
-        Click
-    </button> */}
+    
 
-
-    {/* {dat.map(function(value,idx){
+{/* 
+    {dat.map(function(value,idx){
         return <div key={idx}>
             <img src="" alt="" />
             <h1>{value.Title}</h1>
@@ -60,9 +55,10 @@ const Home = () => {
 
 
     {dat.map(function(value,index){
-        <div key={index}>
+        return <div key={index}>
+            <img src="" alt="" />
             <h5>
-                {dat.Title}
+                {value.Title}:{value.Year}
             </h5>
 
         </div>
