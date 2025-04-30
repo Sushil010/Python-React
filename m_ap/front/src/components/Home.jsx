@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
+import Loadercomp from '../../../../combined/client/src/components/Loadercomp'
 
 const Home = () => {
+    
     // const apiKey="48c44e9e"
     const [dat, setDat] = useState([])
     const [search, setSearch] = useState("")
@@ -51,7 +53,9 @@ const Home = () => {
    
     
     {loader?(
-        <div className='text-center text-xl py-10'>loading...</div>
+        <div className='text-center text-xl py-10'>
+            <Loadercomp/>
+        </div>
         ): (
         <div  className='grid grid-cols-3'>
         {dat?.map(function(value,index){
