@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import Loadercomp from './Loadercomp'
+// import Loadercomp from './Loadercomp'
 
 
 const Home = () => {
@@ -54,7 +54,7 @@ const Home = () => {
     
     {loader?(
         <div className='text-center text-xl py-10'>
-            <Loadercomp/>
+            Loading...
         </div>
         ): (
         <div  className='grid grid-cols-3'>
