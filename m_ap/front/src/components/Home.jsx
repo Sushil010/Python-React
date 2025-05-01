@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import Loadercomp from '../../../../combined/client/src/components/Loadercomp'
+import Loadercomp from './Loadercomp'
+
 
 const Home = () => {
-    
     // const apiKey="48c44e9e"
     const [dat, setDat] = useState([])
     const [search, setSearch] = useState("")
