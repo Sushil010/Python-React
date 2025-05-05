@@ -11,5 +11,7 @@ values={
     'name':'Values',
     'is_active' : False
 }
+
+# unpacks dictionary to above function
 users=User(**values)
 print(users)
