@@ -1,5 +1,5 @@
 def main():
-    print("Hello from pydantic!")
+    print("Hello from pyd!")
 
 
 if __name__ == "__main__":
