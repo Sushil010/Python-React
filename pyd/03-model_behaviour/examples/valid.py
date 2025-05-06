@@ -11,3 +11,4 @@ class User(BaseModel):
         if len(v) < 4:
             raise ValueError("Must have more than 4 length")
         return v
+    
