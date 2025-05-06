@@ -18,8 +18,22 @@ class Signup(BaseModel):
     conf_password:str
 
     @model_validator(mode='after')
+
+    # reason of doing values.password instead of direct password,
+    # this model_validator will run only after all above field validator runs 
+    # therefore all values are referenced by using "." operator
     def mode_val(cls,values):
         if(values.password!=values.conf_password):
             raise ValueError("Mismatch Password")
         return values
         
+
+class Products(BaseModel):
+    price:float
+    quantity:int
+
+    @computed_field
+    @property
+    
+    def total(self)->float:
+        return self.price*self.quantity
