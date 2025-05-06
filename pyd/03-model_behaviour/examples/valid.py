@@ -12,3 +12,14 @@ class User(BaseModel):
             raise ValueError("Must have more than 4 length")
         return v
     
+
+class Signup(BaseModel):
+    password:str
+    conf_password:str
+
+    @model_validator(mode='after')
+    def mode_val(cls,values):
+        if(values.password!=values.conf_password):
+            raise ValueError("Mismatch Password")
+        return values
+        
