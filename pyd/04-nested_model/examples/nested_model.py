@@ -22,3 +22,23 @@ class Comment(BaseModel):
 
 
 Comment.model_rebuild()
+
+address=Address(
+    id=1,
+    location="Somewhere",
+    postal_code="123 street"
+)
+
+user=User(
+    id=1,
+    name="Someone",
+    address=address
+)
+comment=Comment(
+    id="123one",
+    name="asdf",
+    replies=List[
+        Comment(id="456two",name="ghjkl"),
+        Comment(id="789three",name="qwer"),
+    ]
+)
