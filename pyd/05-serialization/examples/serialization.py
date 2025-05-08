@@ -19,3 +19,16 @@ class User(BaseModel):
    datetime:datetime
    tags:Lists[str]=[]
 
+user=User(
+   id=1,
+   name='Random_indv',
+   isActive=True,
+   email="Random@gmail.com",
+   address=Address(
+      street="Anywhere",
+      city="Random_place",
+      zipcode="124asdf"
+   ),
+   datetime=datetime(2025,3,12,14,53),
+   tags=["subscribed","Not-Subscribed"]
+)
