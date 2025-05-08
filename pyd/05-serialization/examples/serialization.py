@@ -1,5 +1,5 @@
 from pydantic import BaseModel #type:ignore
-from typing import Lists
+from typing import List
 from datetime import datetime
 
 
@@ -17,7 +17,7 @@ class User(BaseModel):
    email:str
    address:Address
    datetime:datetime
-   tags:Lists[str]=[]
+   tags:List[str]=[]
 
 user=User(
    id=1,
@@ -32,3 +32,14 @@ user=User(
    datetime=datetime(2025,3,12,14,53),
    tags=["subscribed","Not-Subscribed"]
 )
+
+
+# model_dump will provide dictionary values to user
+python_dict=user.model_dump()
+print(python_dict)
+
+print("<================================================>\n")
+
+# model_dump_json will provide json file to user
+python_json=user.model_dump_json()
+print(python_json)
