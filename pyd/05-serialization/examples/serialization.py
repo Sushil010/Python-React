@@ -1,4 +1,4 @@
-from pydantic import BaseModel #type:ignore
+from pydantic import BaseModel,ConfigDict #type:ignore
 from typing import List
 from datetime import datetime
 
@@ -18,6 +18,10 @@ class User(BaseModel):
    address:Address
    datetime:datetime
    tags:List[str]=[]
+
+   model_config=ConfigDict(
+      json_encoders={datetime:lambda v:v.strftime('%d-%m-%Y %H:%M:%S')}
+      )
 
 user=User(
    id=1,
