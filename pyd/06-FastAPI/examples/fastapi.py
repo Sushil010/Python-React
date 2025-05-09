@@ -15,3 +15,11 @@ class User(BaseModel):
 class Settings(BaseModel):
     app_name:str="App Test"
     admin_mail:str="admin@gmail.com"
+
+
+def getsettings():
+    return Settings
+
+@app.post('/signup')
+def signup(user:User):
+    return {'message':f"{User.name} has signed in successfully"}
