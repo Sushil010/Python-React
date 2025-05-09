@@ -18,8 +18,13 @@ class Settings(BaseModel):
 
 
 def getsettings():
-    return Settings
+    return Settings()
 
 @app.post('/signup')
 def signup(user:User):
     return {'message':f"{User.name} has signed in successfully"}
+
+# the below is done so to make any changes or if any value is to be retreived
+@app.get('/settings')
+def get_endpoint(settings: Settings=Depends(getsettings)):
+    return settings
