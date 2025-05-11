@@ -12,10 +12,19 @@ class PaymentRequest(BaseModel):
     source:Literal['esewa','Khalti']=Field(...,description='Payment Provider')
     remarks:str=Field(...,min_length=3,max_length=200,description='Min 3 letter required')
 
+
+@app.get("/")
+def read_root():
+    return{"Hello":"User"}
+
+
 @app.post("/payments")
 def creatrepayment(payment:PaymentRequest):
     return {"status":"success", "data":payment}
 
+@app.get("/datas")
+def get_datas(payment:PaymentRequest):
+    return{f"User has entered:{payment.amount} amount value"}
 
 
 
