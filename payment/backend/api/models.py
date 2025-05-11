@@ -5,19 +5,34 @@
 
 
 # from django.db import models
-from pydantic import BaseModel,Field#type:ignore
+# from pydantic import BaseModel,Field#type:ignore
 from fastapi import FastAPI #type:ignore
 from typing import Literal,Optional
-from sqlmodel import SQLModel,create_engine,Session #type:ignore
-
+from sqlmodel import SQLModel,create_engine,Session, Field  #type:ignore
+from enum import Enum 
 
 app=FastAPI()
 # Create your models here.
+
+class Currency(str, Enum):
+    NPR='NPR',
+    USD='USD'
+
+class Source(str,Enum):
+    esewa="esewa",
+    khalti="khalti"
+
+
+
 class PaymentRequest(SQLModel,table=True):
-    id:Optional[int]=Field(primary_Key=True)
+    id: Optional[int] = Field(default=None, primary_key=True)
     amount:float
-    currency:Literal['NPR','USD']=Field(...,description='3-letter currency code')
-    source:Literal['esewa','Khalti']=Field(...,description='Payment Provider')
+    
+    # Use below in case of pydantic and BaseModel as it supports Literal but not
+    # with SQLModel
+    # currency:Literal['NPR','USD']=Field(...,description='3-letter currency code')
+    currency:Currency=Field(...,description='3-letter currency code')
+    source:Source=Field(...,description='Payment Provider')
     remarks:str=Field(...,min_length=3,max_length=200,description='Min 3 letter required')
 
 #Define databse name 
@@ -40,7 +55,11 @@ def read_root():
 
 @app.post("/payments")
 # FastAPI auto-validates request body using this model
-def creatrepayment(payment:PaymentRequest):
+def createpayment(payment:PaymentRequest):
+    with Session(engine) as session:
+        session.add(payment)
+        session.commit()
+        session.refresh(payment)
     return {"status":"success", "data":payment}
 
 
