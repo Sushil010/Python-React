@@ -15,6 +15,11 @@ class PaymentRequest(BaseModel):
 @app.post("/payments")
 def creatrepayment(payment:PaymentRequest):
     return {"status":"success", "data":payment}
+
+
+
+
+
 # users=PaymentRequest(
 #     amount=42323.12,
 #     currency='NPR',
