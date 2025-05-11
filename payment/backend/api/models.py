@@ -1,12 +1,19 @@
+# POST: to create data.
+# GET: to read data.
+# PUT: to update data.
+# DELETE: to delete data.
+
+
 # from django.db import models
 from pydantic import BaseModel,Field#type:ignore
 from fastapi import FastAPI #type:ignore
 from typing import Literal
+from sqlmodel import SQLModel,create_engine,Session
 
 
 app=FastAPI()
 # Create your models here.
-class PaymentRequest(BaseModel):
+class PaymentRequest(SQLModel,table=True):
     amount:float
     currency:Literal['NPR','USD']=Field(...,description='3-letter currency code')
     source:Literal['esewa','Khalti']=Field(...,description='Payment Provider')
@@ -19,9 +26,14 @@ def read_root():
 
 
 @app.post("/payments")
+# FastAPI auto-validates request body using this model
 def creatrepayment(payment:PaymentRequest):
     return {"status":"success", "data":payment}
 
+
+
+# data will vanish won't be received so better to store in some database so SQL is used in
+# our case.
 @app.get("/datas")
 def get_datas(payment:PaymentRequest):
     return{f"User has entered:{payment.amount} amount value"}
