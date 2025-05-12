@@ -75,11 +75,13 @@ def createpayment(payment:PaymentRequest):
 
 
 # Search by all payment methods
+# payment is list not an object so cannot access like above 
 @app.get("/payments")
 def getPayment():
     with Session(engine) as session:
         payments=session.query(PaymentRequest).all()
-    return{f"User entered following:{payments}"}
+        amount=[payment.amount for payment in payments]
+    return{f"User entered following amount:{amount}"}
 
 
 # retreive by specific payment id 
