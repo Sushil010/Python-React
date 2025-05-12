@@ -66,12 +66,30 @@ def createpayment(payment:PaymentRequest):
 
 # data will vanish won't be received so better to store in some database so SQL is used in
 # our case.
-@app.get("/datas")
-def get_datas(payment:PaymentRequest):
-    return{f"User has entered:{payment.amount} amount value"}
+# won't work because session hqas to be established in below to get all datas.
+# @app.get("/datas")
+# def get_datas(payment:PaymentRequest):
+#     return{f"User has entered:{payment.amount} amount value"}
 
 
 
+
+# Search by all payment methods
+@app.get("/payments")
+def getPayment():
+    with Session(engine) as session:
+        payments=session.query(PaymentRequest).all()
+    return{f"User entered following:{payments}"}
+
+
+# retreive by specific payment id 
+# @app.get("/payments/{payment_id}")
+# def getPayment(payment_id:int):
+#     with Session(engine) as session:
+#         payments=session.get(PaymentRequest,payment_id)
+#         if not payment:
+#             return{f"Details not found"}
+#         return{f"User entered follwing details:{payments}"}
 
 # users=PaymentRequest(
 #     amount=42323.12,
