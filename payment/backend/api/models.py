@@ -66,7 +66,7 @@ def createpayment(payment:PaymentRequest):
 
 # data will vanish won't be received so better to store in some database so SQL is used in
 # our case.
-# won't work because session hqas to be established in below to get all datas.
+# won't work because session has to be established in below to get all datas.
 # @app.get("/datas")
 # def get_datas(payment:PaymentRequest):
 #     return{f"User has entered:{payment.amount} amount value"}
@@ -80,8 +80,8 @@ def createpayment(payment:PaymentRequest):
 def getPayment():
     with Session(engine) as session:
         payments=session.query(PaymentRequest).all()
-        amount=[payment.amount for payment in payments]
-    return{f"User entered following amount:{amount}"}
+        # amount=[payment.amount for payment in payments]
+    return{f"User entered following amount:{payments}"}
 
 
 # retreive by specific payment id 
